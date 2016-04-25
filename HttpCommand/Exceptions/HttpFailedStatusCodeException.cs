@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace HttpCommands{
+using System;
+
+
+namespace HttpCommand{
     class HttpFailedStatusCodeException:Exception{
         public HttpFailedStatusCodeException(){
                 

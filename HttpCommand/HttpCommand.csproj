@@ -46,6 +46,10 @@
     <Compile Include="Exceptions\URLNotSuppliedException.cs" />
     <Compile Include="HttpRunner.cs" />
     <Compile Include="Objects\AuthenticationHeader.cs" />
+    <Compile Include="Objects\ContentTypes.cs" />
+    <Compile Include="Objects\HttpContentToSend.cs" />
+    <Compile Include="Objects\HttpRequestInfo.cs" />
+    <Compile Include="Objects\RequestType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
