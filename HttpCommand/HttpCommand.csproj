@@ -40,6 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\HttpFailedStatusCodeException.cs" />
+    <Compile Include="Exceptions\HttpRequestFailedException.cs" />
+    <Compile Include="Exceptions\RequestTypeNotSuppliedException.cs" />
+    <Compile Include="Exceptions\URLNotSuppliedException.cs" />
+    <Compile Include="HttpRunner.cs" />
+    <Compile Include="Objects\AuthenticationHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
