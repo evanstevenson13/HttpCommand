@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 
 
-namespace HttpCommand {
+namespace HttpCommand{
     /// <summary>
     /// Can be used to send different types of http requests
     /// </summary>

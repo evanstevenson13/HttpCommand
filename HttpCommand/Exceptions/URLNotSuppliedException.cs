@@ -4,7 +4,7 @@ using System;
 
 
 namespace HttpCommand{
-    class URLNotSuppliedException:Exception{
+    public class URLNotSuppliedException:Exception{
         public URLNotSuppliedException(){
                 
         }
