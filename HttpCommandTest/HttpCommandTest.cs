@@ -8,7 +8,7 @@ namespace HttpCommandTest{
     public class HttpCommandTest{
 
         [TestMethod]
-        [ExpectedException(typeof(URLNotSuppliedException))]
+        [ExpectedException(typeof(EmptyOrInvalidUriException))]
         public void NoUrlSupplied(){
             HttpContentToSend content = new HttpContentToSend();
             HttpRequestInfo requestInfo = new HttpRequestInfo(string.Empty, RequestType.Get, content);

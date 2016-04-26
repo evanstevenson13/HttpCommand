@@ -13,13 +13,13 @@ namespace HttpCommand{
     /// </summary>
     public class HttpRequestInfo{
         private string url = string.Empty;
-        private RequestType type = RequestType.Get;
+        private RequestType requestType = RequestType.Get;
         private HttpContentToSend content = null;
         private AuthenticationHeader authentication = null;
 
-        public HttpRequestInfo(string url, RequestType type, HttpContentToSend content){
+        public HttpRequestInfo(string url, RequestType requestType, HttpContentToSend content){
             this.url = url;
-            this.type = type;
+            this.requestType = requestType;
             this.content = content;
         }
 
@@ -37,25 +37,36 @@ namespace HttpCommand{
         /// </summary>
         /// <returns>A uri for the provided url or null if the url was invalid</returns>
         public Uri GetURI(){
-            Uri uriResult;
+            Uri uriResult = null;
             if(Uri.TryCreate(url, UriKind.Absolute, out uriResult)){
-                if(uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps){
-                    if(Uri.CheckHostName(url) != UriHostNameType.Basic || Uri.CheckHostName(url) != UriHostNameType.Unknown){
-                        return uriResult;
-                    }
+                if(uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps){
+                    //if(Uri.CheckHostName(url) == UriHostNameType.Basic || Uri.CheckHostName(url) == UriHostNameType.Unknown){
+                    //    uriResult = null;
+                    //}
+                    uriResult = null;
                 }
             }
-            return null;
+            if(uriResult != null && requestType == RequestType.Get && content != null){
+                if(!string.IsNullOrEmpty(url)&&!string.IsNullOrEmpty(content.GetContentString())){
+                    uriResult = new Uri(uriResult, string.Concat("?", content.GetContentString()));
+                }
+            }
+            return uriResult;
         }
 
         protected internal RequestType GetRequestType(){
-            return type;
+            return requestType;
         }
 
         protected internal HttpContentToSend GetContent(){
             return content;
         }
 
+
+        /// <summary>
+        /// Gets the authentication header to be sent with the request
+        /// </summary>
+        /// <returns>A authentication header with the supplied username and password</returns>
         public AuthenticationHeaderValue GetHeader(){
             if(authentication == null){
                 return null;
