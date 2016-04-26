@@ -17,6 +17,15 @@ namespace HttpCommand{
         private HttpContentToSend content = null;
         private AuthenticationHeader authentication = null;
 
+        public HttpRequestInfo(string url, RequestType type){
+            this.url = url;
+            this.type = type;
+        }
+
+        public HttpRequestInfo(string url, RequestType type, AuthenticationHeader authentication) : this(url, type){
+            this.authentication = authentication;
+        }
+
         public HttpRequestInfo(string url, RequestType type, HttpContentToSend content){
             this.url = url;
             this.type = type;

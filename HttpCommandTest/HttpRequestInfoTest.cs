@@ -3,6 +3,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HttpCommand;
 using System;
+using HttpCommands.Objects;
+
 
 namespace HttpCommandTest{
     [TestClass]
@@ -10,7 +12,17 @@ namespace HttpCommandTest{
         
         [TestMethod]
         public void InvalidEmptyURL(){
-            HttpRequestInfo requestInfo = new HttpRequestInfo(string.Empty, RequestType.Get, null);
+
+            HttpRequestInfo testInfo = new HttpRequestInfo(
+                "oatestdata.azurewebsites.net:80/api/1.0/devices/"
+                , RequestType.Get
+                , new AuthenticationHeader("admin", "password")
+            );
+
+            Uri testUri = testInfo.GetURI();
+
+
+            HttpRequestInfo requestInfo = new HttpRequestInfo(string.Empty, RequestType.Get);
             Assert.IsNull(requestInfo.GetURI());
         }
 
@@ -18,7 +30,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void InvalidURLWithOnlyDomain(){
             string URL = "ADomainHere";
-            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get, null);
+            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get);
             Assert.IsNull(requestInfo.GetURI());
         }
 
@@ -26,7 +38,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void InvalidURLWithOutTopLevelDomainButStillValid(){
             String URL = "http://ADomainHere";
-            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get, null);
+            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get);
             Assert.IsNotNull(requestInfo.GetURI());
             Assert.AreEqual(new Uri(URL), requestInfo.GetURI());
         }
@@ -35,7 +47,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void InvalidURLWithTopLevelDomain(){
             string URL = "ADomainHere.com";
-            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get, null);
+            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get);
             Assert.IsNull(requestInfo.GetURI());
         }
 
@@ -43,7 +55,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void ValidURL(){
             string URL = "http://google.com";
-            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get, null);
+            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get);
             Assert.IsNotNull(requestInfo.GetURI());
             Assert.AreEqual(new Uri(URL), requestInfo.GetURI());
         }
@@ -52,7 +64,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void ValidHTTPURL(){
             string URL = "http://www.google.com";
-            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get, null);
+            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get);
             Assert.IsNotNull(requestInfo.GetURI());
             Assert.AreEqual(new Uri(URL), requestInfo.GetURI());
         }
@@ -61,7 +73,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void ValidHTTPSURL(){
             string URL = "https://www.google.com";
-            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get, null);
+            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get);
             Assert.IsNotNull(requestInfo.GetURI());
             Assert.AreEqual(new Uri(URL), requestInfo.GetURI());
         }
@@ -70,7 +82,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void InvalidIPAddressNoProtocol(){
             string URL = "127.0.0.1";
-            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get, null);
+            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get);
             Assert.IsNull(requestInfo.GetURI());
         }
 
@@ -78,7 +90,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void InvalidIPAddressButStillValid(){
             string URL = "http://1277777.0.0.1";
-            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get, null);
+            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get);
             Assert.IsNotNull(requestInfo.GetURI());
             Assert.AreEqual(new Uri(URL), requestInfo.GetURI());
         }
@@ -87,7 +99,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void ValidHTTPIPAddress(){
             string URL = "http://127.0.0.1";
-            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get, null);
+            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get);
             Assert.IsNotNull(requestInfo.GetURI());
             Assert.AreEqual(new Uri(URL), requestInfo.GetURI());
         }
@@ -96,7 +108,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void ValidHTTPSIPAddress(){
             string URL = "http://127.0.0.1";
-            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get, null);
+            HttpRequestInfo requestInfo = new HttpRequestInfo(URL, RequestType.Get);
             Assert.IsNotNull(requestInfo.GetURI());
             Assert.AreEqual(new Uri(URL), requestInfo.GetURI());
         }

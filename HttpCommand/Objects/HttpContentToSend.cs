@@ -49,6 +49,9 @@ namespace HttpCommand{
         /// </summary>
         /// <returns>The content string</returns>
         protected internal string GetContentString(){
+            if(string.IsNullOrEmpty(content)){
+                content = string.Empty;
+            }
             return content;
         }
 
