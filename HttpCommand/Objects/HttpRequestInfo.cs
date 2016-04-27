@@ -13,22 +13,13 @@ namespace HttpCommand{
     /// </summary>
     public class HttpRequestInfo{
         private string url = string.Empty;
-        private RequestType type = RequestType.Get;
+        private RequestType requestType = RequestType.Get;
         private HttpContentToSend content = null;
         private AuthenticationHeader authentication = null;
 
-        public HttpRequestInfo(string url, RequestType type){
+        public HttpRequestInfo(string url, RequestType requestType, HttpContentToSend content){
             this.url = url;
-            this.type = type;
-        }
-
-        public HttpRequestInfo(string url, RequestType type, AuthenticationHeader authentication) : this(url, type){
-            this.authentication = authentication;
-        }
-
-        public HttpRequestInfo(string url, RequestType type, HttpContentToSend content){
-            this.url = url;
-            this.type = type;
+            this.requestType = requestType;
             this.content = content;
         }
 
@@ -64,13 +55,18 @@ namespace HttpCommand{
         }
 
         protected internal RequestType GetRequestType(){
-            return type;
+            return requestType;
         }
 
         protected internal HttpContentToSend GetContent(){
             return content;
         }
 
+
+        /// <summary>
+        /// Gets the authentication header to be sent with the request
+        /// </summary>
+        /// <returns>A authentication header with the supplied username and password</returns>
         public AuthenticationHeaderValue GetHeader(){
             if(authentication == null){
                 return null;

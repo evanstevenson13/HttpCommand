@@ -30,8 +30,12 @@ namespace HttpCommands.Objects{
         /// </summary>
         /// <returns>The authentication object</returns>
         public AuthenticationHeaderValue GetHeader(){
-            byte[] encodedValues = Encoding.ASCII.GetBytes(string.Concat(username, ":", password));
-            return new AuthenticationHeaderValue("Authorization", Convert.ToBase64String(encodedValues));
+            AuthenticationHeaderValue header = null;
+            if(!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password)){
+                byte[] encodedValues = Encoding.ASCII.GetBytes(string.Concat(username, ":", password));
+                header = new AuthenticationHeaderValue("Authorization", Convert.ToBase64String(encodedValues));
+            }
+            return header;
         }
     }
 }

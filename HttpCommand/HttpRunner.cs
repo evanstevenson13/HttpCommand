@@ -25,7 +25,7 @@ namespace HttpCommand{
             RequestType type = data.GetRequestType();
             HttpContentToSend content = data.GetContent();
 
-            if(requestUri == null){
+            if(data.GetURI() == null){
                 throw new EmptyOrInvalidUriException("No url was specified");
             }
 
