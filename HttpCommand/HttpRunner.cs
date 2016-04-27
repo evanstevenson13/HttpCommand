@@ -21,12 +21,12 @@ namespace HttpCommand{
         public static string SendHttpRequest(HttpRequestInfo data){
             string responseText = string.Empty;
             //string url = data.GetURL();
-            Uri destination = data.GetURI();
+            Uri requestUri = data.GetURI();
             RequestType type = data.GetRequestType();
             HttpContentToSend content = data.GetContent();
 
-            if(destination == null){
-                throw new URLNotSuppliedException("No url was specified");
+            if(requestUri == null){
+                throw new EmptyOrInvalidUriException("No url was specified");
             }
 
             using (HttpClient client = new HttpClient()){
@@ -46,19 +46,19 @@ namespace HttpCommand{
 
                 try{
                     if(type == RequestType.Get){
-                        //url = string.Concat(url, "?", content.GetContentString());
-                        response  = client.GetAsync(destination).Result;
+                        requestUri = new Uri(requestUri, string.Concat("?", content.GetContentString()));
+                        response  = client.GetAsync(requestUri).Result;
                     }else if(type == RequestType.Post){
-                        response  = client.PostAsync(destination, content.GetContent()).Result;
+                        response  = client.PostAsync(requestUri, content.GetContent()).Result;
                     }else if(type == RequestType.Put){
-                        response  = client.PutAsync(destination, content.GetContent()).Result;
+                        response  = client.PutAsync(requestUri, content.GetContent()).Result;
                     }else if(type == RequestType.Delete){
-                        response  = client.DeleteAsync(destination).Result;
+                        response  = client.DeleteAsync(requestUri).Result;
                     }else{
-                        response  = client.GetAsync(destination).Result;
+                        response  = client.GetAsync(requestUri).Result;
                     }
                 }catch(Exception excep){
-                    throw new HttpRequestFailedException("Http request could not be finished, likely a bad/unreachable url("+ destination.ToString() +")", excep);
+                    throw new HttpRequestFailedException("Http request could not be finished, likely a bad/unreachable url("+ requestUri.ToString() +")", excep);
                 }
 
                 if(response.IsSuccessStatusCode){

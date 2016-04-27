@@ -46,15 +46,21 @@ namespace HttpCommand{
         /// </summary>
         /// <returns>A uri for the provided url or null if the url was invalid</returns>
         public Uri GetURI(){
-            Uri uriResult;
+            Uri uriResult = null;
             if(Uri.TryCreate(url, UriKind.Absolute, out uriResult)){
-                if(uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps){
-                    if(Uri.CheckHostName(url) != UriHostNameType.Basic || Uri.CheckHostName(url) != UriHostNameType.Unknown){
-                        return uriResult;
-                    }
+                if(uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps){
+                    //if(Uri.CheckHostName(url) == UriHostNameType.Basic || Uri.CheckHostName(url) == UriHostNameType.Unknown){
+                    //    uriResult = null;
+                    //}
+                    uriResult = null;
                 }
             }
-            return null;
+            if(uriResult != null && requestType == RequestType.Get && content != null){
+                if(!string.IsNullOrEmpty(url)&&!string.IsNullOrEmpty(content.GetContentString())){
+                    uriResult = new Uri(uriResult, string.Concat("?", content.GetContentString()));
+                }
+            }
+            return uriResult;
         }
 
         protected internal RequestType GetRequestType(){
