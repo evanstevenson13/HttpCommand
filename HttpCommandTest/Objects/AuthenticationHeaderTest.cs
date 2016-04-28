@@ -14,7 +14,7 @@ namespace HttpCommandTest{
         [TestMethod]
         public void GetAuthenticationHeaderValue(){
             byte[] encodedValues = Encoding.ASCII.GetBytes(string.Concat("admin", ":", "password"));
-            AuthenticationHeaderValue header = new AuthenticationHeaderValue("Authorization", Convert.ToBase64String(encodedValues));
+            AuthenticationHeaderValue header = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(encodedValues));
             
             AuthenticationHeader authToSend = new AuthenticationHeader("admin", "password");
             Assert.IsNotNull(authToSend.GetHeader());

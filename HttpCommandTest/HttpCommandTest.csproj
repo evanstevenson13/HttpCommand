@@ -36,6 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -56,7 +57,7 @@
   <ItemGroup>
     <Compile Include="Objects\AuthenticationHeaderTest.cs" />
     <Compile Include="Objects\HttpRequestInfoTest.cs" />
-    <Compile Include="HttpCommandTest.cs" />
+    <Compile Include="HttpRunnerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
