@@ -17,6 +17,20 @@ namespace HttpCommand{
         private HttpContentToSend content = null;
         private AuthenticationHeader authentication = null;
 
+        // Assumed to be a get
+        public HttpRequestInfo(string url, RequestType requestType){
+            this.url = url;
+            this.requestType = requestType;
+        }
+
+        // Assumed to be a get with authentication
+        public HttpRequestInfo(string url, RequestType requestType, AuthenticationHeader authentication){
+            this.url = url;
+            this.requestType = requestType;
+            this.authentication = authentication;
+        }
+
+
         public HttpRequestInfo(string url, RequestType requestType, HttpContentToSend content){
             this.url = url;
             this.requestType = requestType;
@@ -40,10 +54,11 @@ namespace HttpCommand{
             Uri uriResult = null;
             if(Uri.TryCreate(url, UriKind.Absolute, out uriResult)){
                 if(uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps){
-                    //if(Uri.CheckHostName(url) == UriHostNameType.Basic || Uri.CheckHostName(url) == UriHostNameType.Unknown){
-                    //    uriResult = null;
-                    //}
                     uriResult = null;
+                }
+                //IP address come up as unknown -> Uri.CheckHostName(url) == UriHostNameType.Unknown
+                if(Uri.CheckHostName(url) == UriHostNameType.Basic){
+                    uriResult=null;
                 }
             }
             if(uriResult != null && requestType == RequestType.Get && content != null){

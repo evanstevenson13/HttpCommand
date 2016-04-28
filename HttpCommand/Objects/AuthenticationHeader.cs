@@ -33,7 +33,8 @@ namespace HttpCommands.Objects{
             AuthenticationHeaderValue header = null;
             if(!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password)){
                 byte[] encodedValues = Encoding.ASCII.GetBytes(string.Concat(username, ":", password));
-                header = new AuthenticationHeaderValue("Authorization", Convert.ToBase64String(encodedValues));
+                //header = new AuthenticationHeaderValue("Authorization", Convert.ToBase64String(encodedValues));
+                header = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(encodedValues));
             }
             return header;
         }
