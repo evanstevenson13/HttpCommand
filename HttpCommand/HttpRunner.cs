@@ -51,7 +51,7 @@ namespace HttpCommand{
                 HttpResponseMessage response = null;
                 // Request times out after 5 seconds
                 //todo Add in option to pass in timeout
-                client.Timeout=new TimeSpan(0,0,5);
+                //client.Timeout = new TimeSpan(0,0,5);
 
                 try {
                     if(type == RequestType.Get){
