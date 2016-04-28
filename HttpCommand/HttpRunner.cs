@@ -12,12 +12,6 @@ namespace HttpCommand{
     public static class HttpRunner{
         private static string responseText = string.Empty;
 
-        public static string SendHttpRequest2(HttpRequestInfo data){
-            responseText = string.Empty;
-
-            return responseText;
-        }
-
 
         /// <summary>
         /// Sends a http request
@@ -89,6 +83,12 @@ namespace HttpCommand{
             return responseText;
         }// SendHttpRequest
 
+
+
+        /// <summary>
+        /// Give the response from the request
+        /// </summary>
+        /// <returns>The response text from the request</returns>
         public static string GetResponse(){
             return responseText;
         }

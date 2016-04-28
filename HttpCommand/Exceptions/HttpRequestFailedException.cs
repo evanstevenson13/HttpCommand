@@ -4,21 +4,28 @@ using System;
 
 
 namespace HttpCommand{
-    class HttpRequestFailedException:Exception{
-        public HttpRequestFailedException(){
-                
-        }
+    /// <summary>
+    /// Exception thats thrown when a request fails
+    /// </summary>
+    public class HttpRequestFailedException : Exception{
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public HttpRequestFailedException(){}
 
-        public HttpRequestFailedException(string message):base(message){
 
-        }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="message">Message to explain exception</param>
+        public HttpRequestFailedException(string message):base(message){}
 
-        public HttpRequestFailedException(string message, Exception inner):base(message, inner){
 
-        }
-
-        //public override string ToString(){
-        //    return StackTrace.ToString();
-        //}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="message">Message to explain exception</param>
+        /// <param name="inner">Exception to add to this exception</param>
+        public HttpRequestFailedException(string message, Exception inner):base(message, inner){}
     }
 }

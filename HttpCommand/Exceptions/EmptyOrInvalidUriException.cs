@@ -4,17 +4,28 @@ using System;
 
 
 namespace HttpCommand{
-    public class EmptyOrInvalidUriException:Exception{
-        public EmptyOrInvalidUriException(){
-                
-        }
+    /// <summary>
+    /// Exception thats thrown when a invalid or empty url is supplied
+    /// </summary>
+    public class EmptyOrInvalidUriException : Exception{
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public EmptyOrInvalidUriException(){}
 
-        public EmptyOrInvalidUriException(string message):base(message){
 
-        }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="message">Message to explain exception</param>
+        public EmptyOrInvalidUriException(string message):base(message){}
 
-        public EmptyOrInvalidUriException(string message, Exception inner):base(message, inner){
 
-        }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="message">Message to explain exception</param>
+        /// <param name="inner">Exception to add to this exception</param>
+        public EmptyOrInvalidUriException(string message, Exception inner):base(message, inner){}
     }
 }

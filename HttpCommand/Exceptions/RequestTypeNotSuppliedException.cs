@@ -4,18 +4,28 @@ using System;
 
 
 namespace HttpCommand{
-    class RequestTypeNotSuppliedException:Exception{
+    /// <summary>
+    /// Exception thats thrown when a request type is not supplied
+    /// </summary>
+    public class RequestTypeNotSuppliedException : Exception{
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public RequestTypeNotSuppliedException(){}
 
-        public RequestTypeNotSuppliedException(){
-                
-        }
 
-        public RequestTypeNotSuppliedException(string message):base(message){
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="message">Message to explain exception</param>
+        public RequestTypeNotSuppliedException(string message):base(message){}
 
-        }
 
-        public RequestTypeNotSuppliedException(string message, Exception inner):base(message, inner){
-
-        }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="message">Message to explain exception</param>
+        /// <param name="inner">Exception to add to this exception</param>
+        public RequestTypeNotSuppliedException(string message, Exception inner):base(message, inner){}
     }
 }

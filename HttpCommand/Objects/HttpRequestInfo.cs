@@ -17,13 +17,24 @@ namespace HttpCommand{
         private HttpContentToSend content = null;
         private AuthenticationHeader authentication = null;
 
-        // Assumed to be a get
+        
+        /// <summary>
+        /// Constructor - Get request
+        /// </summary>
+        /// <param name="url">Url to request</param>
+        /// <param name="requestType">Request type to send request as</param>
         public HttpRequestInfo(string url, RequestType requestType){
             this.url = url;
             this.requestType = requestType;
         }
 
-        // Assumed to be a get with authentication
+        
+        /// <summary>
+        /// Constructor - Get request with authentication
+        /// </summary>
+        /// <param name="url">Url to request</param>
+        /// <param name="requestType">Request type to send request as</param>
+        /// <param name="authentication">Authentication to use</param>
         public HttpRequestInfo(string url, RequestType requestType, AuthenticationHeader authentication){
             this.url = url;
             this.requestType = requestType;
@@ -31,18 +42,28 @@ namespace HttpCommand{
         }
 
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="url">Url to request</param>
+        /// <param name="requestType">Request type to send request as</param>
+        /// <param name="content">Content to send</param>
         public HttpRequestInfo(string url, RequestType requestType, HttpContentToSend content){
             this.url = url;
             this.requestType = requestType;
             this.content = content;
         }
 
-        public HttpRequestInfo(string url, RequestType type, HttpContentToSend content, AuthenticationHeader authentication) : this(url, type, content){
-            this.authentication = authentication;
-        }
 
-        protected internal string GetURL(){
-            return url;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="url">Url to request</param>
+        /// <param name="requestType">Request type to send request as</param>
+        /// <param name="content">Content to send</param>
+        /// <param name="authentication">Authentication to use</param>
+        public HttpRequestInfo(string url, RequestType requestType, HttpContentToSend content, AuthenticationHeader authentication) : this(url, requestType, content){
+            this.authentication = authentication;
         }
 
 
@@ -69,10 +90,20 @@ namespace HttpCommand{
             return uriResult;
         }
 
+
+        /// <summary>
+        /// Get the request type
+        /// </summary>
+        /// <returns>The request to send</returns>
         protected internal RequestType GetRequestType(){
             return requestType;
         }
 
+
+        /// <summary>
+        /// Get the content object to send
+        /// </summary>
+        /// <returns>Content object to send</returns>
         protected internal HttpContentToSend GetContent(){
             return content;
         }
